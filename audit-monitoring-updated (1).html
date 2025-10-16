@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kertas Kerja Monitoring Audit</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background: #ffffff;
+            min-height: 100vh;
+        }
+        
+        .container {
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .header {
+            background: linear-gradient(to right, #ffeb3b 0%, #2c2c2c 100%);
+            color: white;
+            padding: 40px 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 40px;
+        }
+        
+        .header-left {
+            text-align: left;
+            flex: 1;
+        }
+        
+        .header-left h1 {
+            font-size: 40px;
+            margin-bottom: 15px;
+            font-weight: 700;
+            color: #000000;
+        }
+        
+        .header-left h2 {
+            font-size: 30px;
+            margin-bottom: 10px;
+            font-weight: 700;
+            color: #000000;
+        }
+        
+        .header-left h3 {
+            font-size: 25px;
+            font-weight: 700;
+            color: #000000;
+        }
+        
+        .header-right {
+            background: rgba(255, 255, 255, 0.95);
+            color: #333;
+            padding: 20px 25px;
+            border-radius: 12px;
+            font-size: 14px;
+            line-height: 1.8;
+            max-width: 320px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .header-right div {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+        }
+        
+        .header-right div:last-child {
+            margin-bottom: 0;
+        }
+        
+        .content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 60px 40px;
+            text-align: center;
+        }
+        
+        .welcome-message {
+            font-size: 55px;
+            color: #2c2c2c;
+            margin-bottom: 40px;
+            font-weight: 700;
+        }
+        
+        .logo-esdm {
+            width: 180px;
+            height: 180px;
+            margin: 30px auto 40px;
+            display: block;
+        }
+        
+        .sub-message {
+            font-size: 35px;
+            color: #333;
+            margin-bottom: 60px;
+            font-weight: 600;
+            line-height: 1.5;
+            max-width: 900px;
+        }
+        
+        .btn-start {
+            background: #2c2c2c;
+            color: white;
+            border: none;
+            padding: 22px 70px;
+            font-size: 22px;
+            border-radius: 12px;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            font-weight: 700;
+        }
+        
+        .btn-start:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+            background: #1a1a1a;
+        }
+        
+        .btn-back {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            background: #f5f5f5;
+            color: #333;
+            border: 2px solid #ddd;
+            padding: 12px 30px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            z-index: 1000;
+        }
+        
+        .btn-back:hover {
+            background: #e0e0e0;
+            border-color: #bbb;
+        }
+        
+        .content-slide-two {
+            min-height: calc(100vh - 200px);
+            background: linear-gradient(135deg, #d4af37 0%, #b8962e 50%, #3a3a3a 100%);
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            align-items: center;
+            gap: 20px;
+            padding: 60px 80px;
+            max-width: 750px;
+            margin: 0 auto;
+        }
+        
+        .menu-card-slide-two {
+            background: white;
+            border-radius: 12px;
+            padding: 20px 15px;
+            width: 100%;
+            height: 150px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+        }
+        
+        .menu-card-slide-two:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 35px rgba(0,0,0,0.3);
+        }
+        
+        .menu-icon-slide-two {
+            font-size: 40px;
+            margin-bottom: 10px;
+        }
+        
+        .menu-title-slide-two {
+            font-size: 18px;
+            font-weight: 700;
+            color: #2c2c2c;
+            line-height: 1.3;
+        }
+        
+        .content-detail {
+            min-height: calc(100vh - 200px);
+            background: white;
+            padding: 80px 40px;
+        }
+        
+        .page-title {
+            font-size: 45px;
+            font-weight: 700;
+            color: #2c2c2c;
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .menu-detail-container {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .menu-detail-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .menu-detail-card {
+            padding: 40px 30px;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        
+        .menu-detail-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        .yellow-card {
+            background: #ffeb3b;
+        }
+        
+        .black-card {
+            background: #2c2c2c;
+        }
+        
+        .yellow-card .menu-detail-title {
+            color: #2c2c2c;
+        }
+        
+        .black-card .menu-detail-title {
+            color: white;
+        }
+        
+        .menu-detail-title {
+            font-size: 30px;
+            font-weight: 700;
+        }
+        
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                padding: 30px 20px;
+                background: linear-gradient(to bottom, #ffeb3b 0%, #2c2c2c 100%);
+            }
+            
+            .header-left {
+                text-align: center;
+            }
+            
+            .header-left h1 {
+                font-size: 28px;
+            }
+            
+            .header-left h2 {
+                font-size: 22px;
+            }
+            
+            .header-left h3 {
+                font-size: 18px;
+            }
+            
+            .header-right {
+                max-width: 100%;
+            }
+            
+            .content {
+                padding: 40px 20px;
+            }
+            
+            .welcome-message {
+                font-size: 36px;
+            }
+            
+            .logo-esdm {
+                width: 120px;
+                height: 120px;
+            }
+            
+            .sub-message {
+                font-size: 22px;
+            }
+            
+            .btn-start {
+                padding: 18px 50px;
+                font-size: 18px;
+            }
+            
+            .content-slide-two {
+                grid-template-columns: 1fr;
+                gap: 15px;
+                padding: 40px 20px;
+            }
+            
+            .menu-card-slide-two {
+                max-width: 250px;
+                margin: 0 auto;
+                height: 140px;
+            }
+            
+            .menu-icon-slide-two {
+                font-size: 35px;
+            }
+            
+            .menu-title-slide-two {
+                font-size: 16px;
+            }
+            
+            .page-title {
+                font-size: 32px;
+            }
+            
+            .menu-detail-title {
+                font-size: 24px;
+            }
+            
+            .menu-detail-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Slide Pertama -->
+        <div id="slideOne">
+            <div class="header">
+                <div class="header-left">
+                    <h1>POKJA KEUANGAN - SUB AKUNTANSI</h1>
+                    <h2>DITJEN MINERAL DAN BATUBARA</h2>
+                    <h3>Kementerian ESDM</h3>
+                </div>
+                <div class="header-right">
+                    <div>
+                        <span>📧</span>
+                        <span>akuntansiminerba2@gmail.com</span>
+                    </div>
+                    <div>
+                        <span>📍</span>
+                        <span>Jalan Prof. Soepomo Nomor 10, Tebet, Kota Jakarta Selatan</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="content">
+                <div class="welcome-message">
+                    SELAMAT DATANG!
+                </div>
+                
+                <img class="logo-esdm" src="logo-esdm.png" alt="Logo ESDM" onerror="this.style.display='none'">
+                
+                <div class="sub-message">
+                    Kertas Kerja Monitoring Laporan Hasil Pemeriksaan Audit Ditjen Minerba KESDM
+                </div>
+                
+                <button class="btn-start" onclick="showSlideTwo()">MULAI</button>
+            </div>
+        </div>
+        
+        <!-- Slide Kedua -->
+        <div id="slideTwo" style="display: none;">
+            <div class="header">
+                <div class="header-left">
+                    <h1>POKJA KEUANGAN - SUB AKUNTANSI</h1>
+                    <h2>DITJEN MINERAL DAN BATUBARA</h2>
+                    <h3>Kementerian ESDM</h3>
+                </div>
+                <div class="header-right">
+                    <div>
+                        <span>📧</span>
+                        <span>akuntansiminerba2@gmail.com</span>
+                    </div>
+                    <div>
+                        <span>📍</span>
+                        <span>Jalan Prof. Soepomo Nomor 10, Tebet, Kota Jakarta Selatan</span>
+                    </div>
+                </div>
+            </div>
+            
+            <button class="btn-back" onclick="showSlideOne()">← Kembali</button>
+            
+            <div class="content-slide-two">
+                <div class="menu-card-slide-two" onclick="openMonitoring()">
+                    <div class="menu-icon-slide-two">✒️</div>
+                    <div class="menu-title-slide-two">Monitoring Temuan</div>
+                </div>
+                
+                <div class="menu-card-slide-two" onclick="openLHA()">
+                    <div class="menu-icon-slide-two">📚</div>
+                    <div class="menu-title-slide-two">Kumpulan LHA</div>
+                </div>
+                
+                <div class="menu-card-slide-two" onclick="openUnitEselon()">
+                    <div class="menu-icon-slide-two">🏢</div>
+                    <div class="menu-title-slide-two">Unit Eselon 2 Minerba</div>
+                </div>
+                
+                <div class="menu-card-slide-two" onclick="openDokumenLainnya()">
+                    <div class="menu-icon-slide-two">📁</div>
+                    <div class="menu-title-slide-two">Dokumen Lainnya</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Slide Monitoring Temuan -->
+        <div id="slideMonitoring" style="display: none;">
+            <div class="header">
+                <div class="header-left">
+                    <h1>POKJA KEUANGAN - SUB AKUNTANSI</h1>
+                    <h2>DITJEN MINERAL DAN BATUBARA</h2>
+                    <h3>Kementerian ESDM</h3>
+                </div>
+                <div class="header-right">
+                    <div>
+                        <span>📧</span>
+                        <span>akuntansiminerba2@gmail.com</span>
+                    </div>
+                    <div>
+                        <span>📍</span>
+                        <span>Jalan Prof. Soepomo Nomor 10, Tebet, Kota Jakarta Selatan</span>
+                    </div>
+                </div>
+            </div>
+            
+            <button class="btn-back" onclick="backToSlideTwo()">← Kembali</button>
+            
+            <div class="content-detail">
+                <h2 class="page-title">Monitoring Temuan</h2>
+                <div class="menu-detail-container">
+                    <div class="menu-detail-card yellow-card" onclick="alert('Halaman Temuan ITJEN akan segera dibuka')">
+                        <div class="menu-detail-title">Temuan ITJEN</div>
+                    </div>
+                    
+                    <div class="menu-detail-card black-card" onclick="alert('Halaman Temuan BPK akan segera dibuka')">
+                        <div class="menu-detail-title">Temuan BPK</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Slide Unit Eselon -->
+        <div id="slideUnitEselon" style="display: none;">
+            <div class="header">
+                <div class="header-left">
+                    <h1>POKJA KEUANGAN - SUB AKUNTANSI</h1>
+                    <h2>DITJEN MINERAL DAN BATUBARA</h2>
+                    <h3>Kementerian ESDM</h3>
+                </div>
+                <div class="header-right">
+                    <div>
+                        <span>📧</span>
+                        <span>akuntansiminerba2@gmail.com</span>
+                    </div>
+                    <div>
+                        <span>📍</span>
+                        <span>Jalan Prof. Soepomo Nomor 10, Tebet, Kota Jakarta Selatan</span>
+                    </div>
+                </div>
+            </div>
+            
+            <button class="btn-back" onclick="backToSlideTwo()">← Kembali</button>
+            
+            <div class="content-detail">
+                <h2 class="page-title">Unit Eselon 2 Minerba</h2>
+                <div class="menu-detail-grid">
+                    <div class="menu-detail-card yellow-card" onclick="alert('Halaman SDB akan segera dibuka')">
+                        <div class="menu-detail-title">SDB</div>
+                    </div>
+                    
+                    <div class="menu-detail-card black-card" onclick="alert('Halaman DBP akan segera dibuka')">
+                        <div class="menu-detail-title">DBP</div>
+                    </div>
+                    
+                    <div class="menu-detail-card yellow-card" onclick="alert('Halaman DBB akan segera dibuka')">
+                        <div class="menu-detail-title">DBB</div>
+                    </div>
+                    
+                    <div class="menu-detail-card black-card" onclick="alert('Halaman DBM akan segera dibuka')">
+                        <div class="menu-detail-title">DBM</div>
+                    </div>
+                    
+                    <div class="menu-detail-card yellow-card" onclick="alert('Halaman DBN akan segera dibuka')">
+                        <div class="menu-detail-title">DBN</div>
+                    </div>
+                    
+                    <div class="menu-detail-card black-card" onclick="alert('Halaman DBT akan segera dibuka')">
+                        <div class="menu-detail-title">DBT</div>
+                    </div>
+                    
+                    <div class="menu-detail-card yellow-card" onclick="alert('Halaman Tekmira akan segera dibuka')">
+                        <div class="menu-detail-title">Tekmira</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Slide Dokumen Lainnya -->
+        <div id="slideDokumenLainnya" style="display: none;">
+            <div class="header">
+                <div class="header-left">
+                    <h1>POKJA KEUANGAN - SUB AKUNTANSI</h1>
+                    <h2>DITJEN MINERAL DAN BATUBARA</h2>
+                    <h3>Kementerian ESDM</h3>
+                </div>
+                <div class="header-right">
+                    <div>
+                        <span>📧</span>
+                        <span>akuntansiminerba2@gmail.com</span>
+                    </div>
+                    <div>
+                        <span>📍</span>
+                        <span>Jalan Prof. Soepomo Nomor 10, Tebet, Kota Jakarta Selatan</span>
+                    </div>
+                </div>
+            </div>
+            
+            <button class="btn-back" onclick="backToSlideTwo()">← Kembali</button>
+            
+            <div class="content-detail">
+                <h2 class="page-title">Dokumen Lainnya</h2>
+                <div class="menu-detail-container">
+                    <div class="menu-detail-card yellow-card" onclick="alert('Halaman Nota Dinas akan segera dibuka')">
+                        <div class="menu-detail-title">Nota Dinas</div>
+                    </div>
+                    
+                    <div class="menu-detail-card black-card" onclick="alert('Halaman BA akan segera dibuka')">
+                        <div class="menu-detail-title">BA</div>
+                    </div>
+                    
+                    <div class="menu-detail-card yellow-card" onclick="alert('Halaman Permindok akan segera dibuka')">
+                        <div class="menu-detail-title">Permindok</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function showSlideTwo() {
+            document.getElementById('slideOne').style.display = 'none';
+            document.getElementById('slideTwo').style.display = 'block';
+            document.getElementById('slideMonitoring').style.display = 'none';
+            document.getElementById('slideUnitEselon').style.display = 'none';
+            document.getElementById('slideDokumenLainnya').style.display = 'none';
+        }
+        
+        function showSlideOne() {
+            document.getElementById('slideOne').style.display = 'block';
+            document.getElementById('slideTwo').style.display = 'none';
+            document.getElementById('slideMonitoring').style.display = 'none';
+            document.getElementById('slideUnitEselon').style.display = 'none';
+            document.getElementById('slideDokumenLainnya').style.display = 'none';
+        }
+        
+        function backToSlideTwo() {
+            showSlideTwo();
+        }
+        
+        function openMonitoring() {
+            document.getElementById('slideOne').style.display = 'none';
+            document.getElementById('slideTwo').style.display = 'none';
+            document.getElementById('slideMonitoring').style.display = 'block';
+            document.getElementById('slideUnitEselon').style.display = 'none';
+            document.getElementById('slideDokumenLainnya').style.display = 'none';
+        }
+        
+        function openLHA() {
+            window.open('https://drive.google.com/drive/folders/1uUQ9T3iSJa4BzE-qK3CGLgWpWPl03cYe?usp=drive_link', '_blank');
+        }
+        
+        function openUnitEselon() {
+            document.getElementById('slideOne').style.display = 'none';
+            document.getElementById('slideTwo').style.display = 'none';
+            document.getElementById('slideMonitoring').style.display = 'none';
+            document.getElementById('slideUnitEselon').style.display = 'block';
+            document.getElementById('slideDokumenLainnya').style.display = 'none';
+        }
+        
+        function openDokumenLainnya() {
+            document.getElementById('slideOne').style.display = 'none';
+            document.getElementById('slideTwo').style.display = 'none';
+            document.getElementById('slideMonitoring').style.display = 'none';
+            document.getElementById('slideUnitEselon').style.display = 'none';
+            document.getElementById('slideDokumenLainnya').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
